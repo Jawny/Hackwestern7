@@ -1,14 +1,14 @@
 {
   "name": "hackwestern7",
   "version": "1.0.0",
-	"engines": {
-		"node": "10.x"	
-	},
+  "engines": {
+    "node": "10.x"
+  },
   "description": "",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-		"start": "node index.js"
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
