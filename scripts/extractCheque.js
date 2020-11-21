@@ -1,5 +1,5 @@
 const Tesseract = require('tesseract.js');
-const imageDir = '../src/assets/images';
+const imageDir = '../assets/images';
 
 // Append named-capture feature to JS RegExp
 const named = require('named-regexp').named;
