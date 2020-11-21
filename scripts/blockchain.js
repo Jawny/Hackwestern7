@@ -1,6 +1,6 @@
 const Web3 = require('web3');
 const MyContract = require('../build/contracts/MyContract.json');
-require('dotenv').config();
+require('dotenv').config({path: '../.env'});
 
 class BlockchainHandler {
 	web3;
@@ -48,12 +48,19 @@ class BlockchainHandler {
 		const receipt = await this.web3.eth.sendSignedTransaction(signedTx.rawTransaction);
 		console.log(`Transaction hash: ${receipt.transactionHash}`);
 	}
+
+	async readUser(id) {
+		return await this.myContract.methods.users(id).call();
+	}
 }
 
+module.exports = BlockchainHandler
 
+/*
 const penis = new BlockchainHandler(process.env.ADDRESS);
 penis.init(async () => {
-	await penis.createUser('penis');		
+	await penis.readUser(0);		
 });
+*/
 
 
