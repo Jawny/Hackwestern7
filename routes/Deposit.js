@@ -9,7 +9,10 @@ module.exports = putRoute.put("/deposit", (req, res) => {
 
 	const b = new BlockchainHandler(process.env.ADDRESS);
 	b.init(() => {
-		b.deposit(phoneNumber, amount);
+		b.deposit(
+			parseInt(phoneNumber),
+			parseInt(amount)
+		);
 
 		res.json(true)
 	});
