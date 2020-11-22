@@ -41,16 +41,17 @@ class BlockchainHandler {
 		);
 	}
 
-	async createUser(name) {
-		const tx = this.myContract.methods.createUser(name);	
+	async createUser(phoneNumber, pin) {
+		const tx = this.myContract.methods.createUser(phoneNumber, pin);	
 		const signedTx = await this.signTransaction(tx);
 
 		const receipt = await this.web3.eth.sendSignedTransaction(signedTx.rawTransaction);
 		console.log(`Transaction hash: ${receipt.transactionHash}`);
 	}
 
-	async readUser(id) {
-		return await this.myContract.methods.users(id).call();
+	async readUser(phoneNumber) {
+		const tx = await this.myContract.methods.readUser(phoneNumber).call();
+		return(tx);
 	}
 }
 
@@ -59,8 +60,7 @@ module.exports = BlockchainHandler
 /*
 const penis = new BlockchainHandler(process.env.ADDRESS);
 penis.init(async () => {
-	await penis.readUser(0);		
+	// await penis.createUser(7785130738, 1838);
 });
+
 */
-
-
