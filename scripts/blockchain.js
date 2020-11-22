@@ -3,10 +3,10 @@ const MyContract = require('../build/contracts/MyContract.json');
 require('dotenv').config({path: '../.env'});
 
 class BlockchainHandler {
-	web3;
-	account;
-	networkId;
-	myContract;
+	web3
+	account
+	networkId
+	myContract
 
 	constructor(account) {
 		this.web3 = new Web3(process.env.INFURA_URL);
