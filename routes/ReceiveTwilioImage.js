@@ -5,6 +5,7 @@ require("dotenv").config({ path: "../.env" });
 
 module.exports = postRoute.post("/twilio-image", async (req, res) => {
   const { link } = req.body;
+  console.log(link);
   const result = true; // send image link to api
   res.send(result);
 });
