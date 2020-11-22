@@ -8,10 +8,9 @@ require('dotenv').config({path: '../.env'});
 // @access Public
 module.exports = postRoute.post("/balance", (req, res) => {
 
-	// Initialize connection to blockchain
 	const b = new BlockchainHandler(process.env.ADDRESS);
 	b.init(async () => {
-		res.json(await b.readUser(0));
+		res.json(await b.readUser(parseInt(req.body.phoneNumber)));
 	});
 
 });

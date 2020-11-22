@@ -3,40 +3,40 @@ pragma solidity ^0.5.0;
 contract MyContract {
 
 	struct User {
-		uint id;
-		string name;
+		uint phoneNumber;
+		uint pin;
 		uint balance;		// How much cash they got in their account
 	}
 
 	// State variable - we will be storing user data here 
 	User[] public users;
-	uint public nextId;
 
-	function createUser(string memory _name) public {
-		users.push(User(nextId, _name, 0));
-		nextId++; 
+	function createUser(uint phoneNumber, uint pin) public {
+		users.push(User(phoneNumber, pin, 0));
 	}
 
+	/*
 	// Update user funds
 	function updateUser(uint _id, string memory _name) public {
 		uint i = findUser(_id);	
 		users[i].name = _name;
 	}
+	*/
 
-	function readUser(uint _id) public view returns (uint, string memory) {
-		uint i = findUser(_id);
-		return (users[i].id, users[i].name); 
+	function readUser(uint phoneNumber) public view returns (uint, uint) {
+		uint i = findUser(phoneNumber);
+		return (users[i].phoneNumber, users[i].balance); 
 	}
 
-	function deleteUser(uint _id) public {
-		uint i = _id;
+	function deleteUser(uint phoneNumber) public {
+		uint i = phoneNumber;
 		delete users[i];
 	}
 
 	// Code that can search inside the user array
-	function findUser(uint _id) internal view returns (uint) {
+	function findUser(uint phoneNumber) internal view returns (uint) {
 		for(uint i = 0; i < users.length; i++) {
-			if(users[i].id == _id) {
+			if(users[i].phoneNumber == phoneNumber) {
 				return i;	
 			}
 		}
