@@ -21,6 +21,14 @@ contract MyContract {
 		users[i].balance = amount;
 	}
 
+	function transferFunds(uint phoneNumber, uint amount, uint receiver) public {
+		uint i = findUser(phoneNumber);	
+		users[i].balance = users[i].balance - amount;
+
+		uint j = findUser(receiver);
+		users[j].balance = users[j].balance + amount;
+	}
+
 	function readUser(uint phoneNumber) public view returns (uint, uint) {
 		uint i = findUser(phoneNumber);
 		return (users[i].phoneNumber, users[i].balance); 
