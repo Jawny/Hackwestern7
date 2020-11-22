@@ -15,6 +15,7 @@ module.exports = postRoute.post("/balance", (req, res) => {
   } else {
     formattedPhoneNumber = phoneNumber;
   }
+  console.log(typeof formattedPhoneNumber, formattedPhoneNumber);
 
   const b = new BlockchainHandler(process.env.ADDRESS);
   b.init(async () => {
