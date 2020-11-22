@@ -29,7 +29,8 @@ const getConfidentSymbols = words => {
     })
 }
 
-const readCheque = async (image, callback) => {
+const readCheque = async (image) => {
+    let data = {}
     await worker.load();
     await worker.loadLanguage(LANGUAGE_CODE);
     await worker.initialize(LANGUAGE_CODE);
@@ -46,7 +47,8 @@ const readCheque = async (image, callback) => {
 
             // If can't find any text
             if (res.data.lines === 0 || res.data.lines.length === 0) {
-                return callback({ error: "NO_TEXT_FOUND" }, response);
+                worker.terminate();
+                data = { error: NO_TEXT_FOUND, response};
             }
 
             var lines = res.data.lines; // Get lines
@@ -61,7 +63,8 @@ const readCheque = async (image, callback) => {
             var chequeMatches = CANADIAN_CHEQUE_REGEX.exec(parsedChequeLine);   // Check if the text is a Canadian cheque
 
             if (!chequeMatches) {
-                return callback({ error: "NO_CHEQUE_NUMBNERS_FOUND" }, response);
+                worker.terminate();
+                data = { error: NO_CHEQUE_NUMBNERS_FOUND, response};
             }
 
             response.confidence = averageConfidence;
@@ -70,16 +73,10 @@ const readCheque = async (image, callback) => {
                 institution: chequeMatches.captures.institution[0].replace(/\D/g, ''),
                 account: chequeMatches.captures.account[0].replace(/\D/g, ''),
             }
-
-            return callback(null, response);
+            worker.terminate();
+             data = {error: null, response};
         })
-    await worker.terminate();
+    return data
 }
 
-readCheque(`${imageDir}/testCheque1.jpg`, function (err, res) {
-    if (err) {
-        console.error(err);
-    } else {
-        console.log(res.body);
-    }
-});
+readCheque(`${imageDir}/testCheque1.jpg`).then(res => {console.log(res)}).catch(err => console.error(err));
