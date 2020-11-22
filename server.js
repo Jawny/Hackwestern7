@@ -18,6 +18,7 @@ app.use("/api", routes.BasicPost);
 app.use("/api", routes.BasicPut);
 app.use("/api", routes.BasicDelete);
 app.use("/api", routes.Balance);
+app.use("/api", routes.Register);
 
 app.listen(PORT, () => {
   console.log(`server running on port ${PORT}`);

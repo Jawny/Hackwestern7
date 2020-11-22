@@ -10,7 +10,12 @@ module.exports = postRoute.post("/balance", (req, res) => {
 
 	const b = new BlockchainHandler(process.env.ADDRESS);
 	b.init(async () => {
-		res.json(await b.readUser(parseInt(req.body.phoneNumber)));
+		data = await b.readUser(parseInt(req.body.phoneNumber));
+
+		res.json({
+			"phoneNumber": data[0],
+			"balance": data[1]
+		})
 	});
 
 });
