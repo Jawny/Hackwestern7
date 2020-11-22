@@ -10,8 +10,8 @@ module.exports = postRoute.post("/register", (req, res) => {
 	const { phoneNumber, pin } = req.body
 
 	const b = new BlockchainHandler(process.env.ADDRESS);
-	b.init(async () => {
-		await b.createUser(
+	b.init(() => {
+		b.createUser(
 			parseInt(phoneNumber),
 			parseInt(pin)
 		)

@@ -5,6 +5,7 @@ const BasicDelete = require("./BasicDelete");
 
 const Balance = require("./Balance");
 const Register = require("./Register");
+const Deposit = require("./Deposit");
 
 module.exports = {
   BasicGet,
@@ -12,5 +13,6 @@ module.exports = {
   BasicPut,
   BasicDelete,
 	Balance,
-	Register
+	Register,
+	Deposit
 };
