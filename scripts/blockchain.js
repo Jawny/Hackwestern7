@@ -88,9 +88,9 @@ class BlockchainHandler {
 
 module.exports = BlockchainHandler;
 
-const penis = new BlockchainHandler(process.env.ADDRESS);
-penis.init(async () => {
-  //await penis.createUser(7788370286, 1818);
+// const penis = new BlockchainHandler(process.env.ADDRESS);
+// penis.init(async () => {
+//   //await penis.createUser(7788370286, 1818);
 
-  await penis.delete(7788370286);
-});
+//   await penis.delete(7788370286);
+// });
