@@ -12,7 +12,10 @@ contract MyContract {
 	User[] public users;
 
 	function createUser(uint phoneNumber, uint pin) public {
-		users.push(User(phoneNumber, pin, 0));
+		uint i = findUser(phoneNumber);
+		if (users[i].phoneNumber != phoneNumber)  {
+			users.push(User(phoneNumber, pin, 0));
+		}
 	}
 
 	// Update user funds
