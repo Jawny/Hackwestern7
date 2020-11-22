@@ -18,7 +18,7 @@ app.use("/api", routes.Register);
 app.use("/api", routes.Deposit);
 app.use("/api", routes.Transfer);
 app.use("/api", routes.Delete);
-app.use("/api", routes.ReceiveTwilioImage);
+app.use("/api", routes.VerifyCheque);
 
 app.listen(PORT, () => {
   console.log(`server running on port ${PORT}`);

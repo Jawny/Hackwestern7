@@ -3,7 +3,7 @@ const Register = require("./Register");
 const Deposit = require("./Deposit");
 const Transfer = require("./Transfer");
 const Delete = require("./Delete");
-const ReceiveTwilioImage = require("./ReceiveTwilioImage");
+const VerifyCheque = require("./VerifyCheque");
 
 module.exports = {
   Balance,
@@ -11,5 +11,5 @@ module.exports = {
   Deposit,
   Transfer,
   Delete,
-  ReceiveTwilioImage,
+  VerifyCheque,
 };
