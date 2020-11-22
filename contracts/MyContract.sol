@@ -15,13 +15,11 @@ contract MyContract {
 		users.push(User(phoneNumber, pin, 0));
 	}
 
-	/*
 	// Update user funds
-	function updateUser(uint _id, string memory _name) public {
-		uint i = findUser(_id);	
-		users[i].name = _name;
+	function updateUser(uint phoneNumber, uint amount) public {
+		uint i = findUser(phoneNumber);	
+		users[i].balance = amount;
 	}
-	*/
 
 	function readUser(uint phoneNumber) public view returns (uint, uint) {
 		uint i = findUser(phoneNumber);
