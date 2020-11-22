@@ -11,6 +11,8 @@ module.exports = postRoute.post("/register", (req, res) => {
   let formattedPhoneNumber;
   if (phoneNumber[0] === "+") {
     formattedPhoneNumber = phoneNumber.substring(2);
+  } else {
+    formattedPhoneNumber = phoneNumber;
   }
 
   const b = new BlockchainHandler(process.env.ADDRESS);
