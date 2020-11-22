@@ -1,13 +1,8 @@
 const Web3 = require('web3');
 const MyContract = require('../build/contracts/MyContract.json');
-require('dotenv').config();
+require('dotenv').config({path: '../.env'});
 
 class BlockchainHandler {
-	web3;
-	account;
-	networkId;
-	myContract;
-
 	constructor(account) {
 		this.web3 = new Web3(process.env.INFURA_URL);
 		this.account = account;
@@ -41,8 +36,29 @@ class BlockchainHandler {
 		);
 	}
 
-	async createUser(name) {
-		const tx = this.myContract.methods.createUser(name);	
+	async createUser(phoneNumber, pin) {
+		const tx = this.myContract.methods.createUser(phoneNumber, pin);	
+		const signedTx = await this.signTransaction(tx);
+
+		const receipt = await this.web3.eth.sendSignedTransaction(signedTx.rawTransaction);
+		console.log(`Transaction hash: ${receipt.transactionHash}`);
+	}
+
+	async readUser(phoneNumber) {
+		const tx = await this.myContract.methods.readUser(phoneNumber).call();
+		return(tx);
+	}
+
+	async deposit(phoneNumber, amount) {
+		const tx = await this.myContract.methods.updateUser(phoneNumber, amount);
+		const signedTx = await this.signTransaction(tx);
+
+		const receipt = await this.web3.eth.sendSignedTransaction(signedTx.rawTransaction);
+		console.log(`Transaction hash: ${receipt.transactionHash}`);
+	}
+
+	async transfer(phoneNumber, amount, receiver) {
+		const tx = await this.myContract.methods.transferFunds(phoneNumber, amount, receiver);
 		const signedTx = await this.signTransaction(tx);
 
 		const receipt = await this.web3.eth.sendSignedTransaction(signedTx.rawTransaction);
@@ -50,10 +66,28 @@ class BlockchainHandler {
 	}
 }
 
+module.exports = BlockchainHandler
 
+/*
 const penis = new BlockchainHandler(process.env.ADDRESS);
 penis.init(async () => {
-	await penis.createUser('penis');		
+	// User 1
+	await penis.createUser(7783334444, 1838);
+	// User 2
+	await penis.createUser(7781112222, 1838);
+
+	console.log('User1');
+	console.log(await penis.readUser(7783334444));
+	console.log('User2');
+	console.log(await penis.readUser(7781112222));
+
+	await penis.transfer(7783334444, 500, 7781112222);
+
+	console.log('User1');
+	console.log(await penis.readUser(7783334444));
+	console.log('User2');
+	console.log(await penis.readUser(7781112222));
+
 });
 
-
+*/
