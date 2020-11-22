@@ -13,13 +13,10 @@ const PORT = process.env.PORT || 3000;
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use("/api", routes.BasicGet);
-app.use("/api", routes.BasicPost);
-app.use("/api", routes.BasicPut);
-app.use("/api", routes.BasicDelete);
 app.use("/api", routes.Balance);
 app.use("/api", routes.Register);
 app.use("/api", routes.Deposit);
+app.use("/api", routes.Transfer);
 
 app.listen(PORT, () => {
   console.log(`server running on port ${PORT}`);

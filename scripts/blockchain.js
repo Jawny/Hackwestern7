@@ -56,6 +56,14 @@ class BlockchainHandler {
 		const receipt = await this.web3.eth.sendSignedTransaction(signedTx.rawTransaction);
 		console.log(`Transaction hash: ${receipt.transactionHash}`);
 	}
+
+	async transfer(phoneNumber, amount, receiver) {
+		const tx = await this.myContract.methods.transferFunds(phoneNumber, amount, receiver);
+		const signedTx = await this.signTransaction(tx);
+
+		const receipt = await this.web3.eth.sendSignedTransaction(signedTx.rawTransaction);
+		console.log(`Transaction hash: ${receipt.transactionHash}`);
+	}
 }
 
 module.exports = BlockchainHandler
@@ -63,12 +71,23 @@ module.exports = BlockchainHandler
 /*
 const penis = new BlockchainHandler(process.env.ADDRESS);
 penis.init(async () => {
-	await penis.createUser(7785130738, 1838);
-	console.log(await penis.readUser(7785130738));
+	// User 1
+	await penis.createUser(7783334444, 1838);
+	// User 2
+	await penis.createUser(7781112222, 1838);
 
-	await penis.deposit(7785130738, 500);
+	console.log('User1');
+	console.log(await penis.readUser(7783334444));
+	console.log('User2');
+	console.log(await penis.readUser(7781112222));
 
-	console.log(await penis.readUser(7785130738));
+	await penis.transfer(7783334444, 500, 7781112222);
+
+	console.log('User1');
+	console.log(await penis.readUser(7783334444));
+	console.log('User2');
+	console.log(await penis.readUser(7781112222));
+
 });
 
 */
