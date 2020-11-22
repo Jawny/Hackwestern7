@@ -17,9 +17,9 @@ filename1 = randint(0, 1000)
 filename2 = randint(1000, 2000)
 
 parser = argparse.ArgumentParser(description="Code for face detection and comparison")
-parser.add_argument('-selfie', '--selfie', help='Url to user selfie',
+parser.add_argument('-s', '--selfie', help='Url to user selfie',
                     default='https://upload.wikimedia.org/wikipedia/commons/1/14/Deadpool_2_Japan_Premiere_Red_Carpet_Ryan_Reynolds_%28cropped%29.jpg')
-parser.add_argument('-id', '--id', help="Url to id photo", default='https://media1.popsugar-assets.com/files/thumbor/UwqHyYaJbx0NSt4TrizsLEwVIyI/0x39:2509x2548/fit-in/2048xorig/filters:format_auto-!!-:strip_icc-!!-/2020/04/02/758/n/1922398/69895fd35e861d0df0e390.53702709_/i/Ryan-Reynolds.jpg')
+parser.add_argument('-i', '--id', help="Url to id photo", default='https://media1.popsugar-assets.com/files/thumbor/UwqHyYaJbx0NSt4TrizsLEwVIyI/0x39:2509x2548/fit-in/2048xorig/filters:format_auto-!!-:strip_icc-!!-/2020/04/02/758/n/1922398/69895fd35e861d0df0e390.53702709_/i/Ryan-Reynolds.jpg')
 args = vars(parser.parse_args())
 
 def store_image(url, local_file_name):
@@ -75,7 +75,9 @@ model_scores = get_model_scores(
 # Common cut-off value used for face identity is between 0.4 and 0.6
 # calculates the distance between two embeddings and interpreting the result
 if cosine(model_scores[0], model_scores[1]) <= 0.5:
-  sys.exit(0)
+    print("Faces matched")
+    sys.exit(0)
 else:
+    print("Faces do not match")
     sys.exit(100)
 
