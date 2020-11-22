@@ -8,8 +8,9 @@ from scipy.spatial.distance import cosine
 from random import randint, seed
 import urllib.request
 import argparse
+import sys
 
-imagesPath = '../../assets/images'
+imagesPath = '../../assets/images/'
 detector = MTCNN()
 seed(1)
 filename1 = randint(0, 1000)
@@ -74,7 +75,7 @@ model_scores = get_model_scores(
 # Common cut-off value used for face identity is between 0.4 and 0.6
 # calculates the distance between two embeddings and interpreting the result
 if cosine(model_scores[0], model_scores[1]) <= 0.5:
-  print("Faces Matched")
+  sys.exit(0)
 else:
-    print('Faces not matched')
+    sys.exit(100)
 
