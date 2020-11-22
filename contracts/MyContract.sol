@@ -35,7 +35,7 @@ contract MyContract {
 	}
 
 	function deleteUser(uint phoneNumber) public {
-		uint i = phoneNumber;
+		uint i = findUser(phoneNumber);
 		delete users[i];
 	}
 
