@@ -1,21 +1,15 @@
 const express = require("express");
-const putRoute = express.Router();
-const BlockchainHandler = require('../scripts/blockchain');
-require('dotenv').config({path: '../.env'});
+const postRoute = express.Router();
+const BlockchainHandler = require("../scripts/blockchain");
+require("dotenv").config({ path: "../.env" });
 
+module.exports = postRoute.put("/deposit", (req, res) => {
+  const { phoneNumber, amount, receiver } = req.body;
 
-module.exports = putRoute.put("/deposit", (req, res) => {
-	const { phoneNumber, amount, receiver } = req.body
+  const b = new BlockchainHandler(process.env.ADDRESS);
+  b.init(() => {
+    b.transfer(parseInt(phoneNumber), parseInt(amount), parseInt(receiver));
 
-	const b = new BlockchainHandler(process.env.ADDRESS);
-	b.init(() => {
-		b.transfer(
-			parseInt(phoneNumber),
-			parseInt(amount),
-			parseInt(receiver)
-		);
-
-		res.json(true)
-	});
-
+    res.json(true);
+  });
 });

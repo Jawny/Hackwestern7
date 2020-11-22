@@ -1,9 +1,9 @@
 const express = require("express");
-const putRoute = express.Router();
+const postRoute = express.Router();
 const BlockchainHandler = require("../scripts/blockchain");
 require("dotenv").config({ path: "../.env" });
 
-module.exports = putRoute.put("/deposit", (req, res) => {
+module.exports = postRoute.post("/deposit", (req, res) => {
   const { phoneNumber, amount } = req.body;
   let formattedPhoneNumber;
   if (phoneNumber[0] === "+") {
