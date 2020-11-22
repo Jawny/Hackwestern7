@@ -1,12 +1,12 @@
 const express = require("express");
-const postRoute = express.Router();
+const deleteRoute = express.Router();
 const BlockchainHandler = require("../scripts/blockchain");
 require("dotenv").config({ path: "../.env" });
 
 // @route POST api/balance
 // @desc Retrieves balance information of account provided by phone number
 // @access Public
-module.exports = postRoute.post("/delete", (req, res) => {
+module.exports = deleteRoute.delete("/delete", (req, res) => {
   const { phoneNumber } = req.body;
 
   let formattedPhoneNumber;
